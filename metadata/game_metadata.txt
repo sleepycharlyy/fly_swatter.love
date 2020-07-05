@@ -1,6 +1,6 @@
-#devid=flyswatter
-#devtitle=Fly Swatter
-#gameid=flyswatter
-#gametitle=Fly Swatter
-#version=0.1
-#icon=metadata/icon.png
+devid=sleepycharlyy
+devtitle=Charly
+gameid=fly-swatter
+gametitle=Fly Swatter
+version=0.1
+icon=metadata/icon.png
