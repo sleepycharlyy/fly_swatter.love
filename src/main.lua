@@ -1,3 +1,14 @@
+-- executes when game starts
+function love.load()
+
+end
+
+-- called on every tick for calculations
+function love.update(tick)
+
+end
+
+-- called on every tick for graphics
 function love.draw()
-    love.graphics.print("Hello World!")
+    love.graphics.rectangle("fill", 0, 0, 200, 100);
 end
