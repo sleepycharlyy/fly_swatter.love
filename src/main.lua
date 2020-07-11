@@ -10,8 +10,15 @@ HEIGHT = 224;
 function love.load()
     -- set title
     love.window.setTitle(GAME_TITLE.." "..GAME_VERSION);
+
     -- set window mode
-    love.window.setMode(1280, 800);
+    love.window.setMode(640, 400, {
+        fullscreen = false,
+        resizable = true,
+        minwidth = WIDTH,
+        minheight = HEIGHT,
+    });
+
     -- create main canvas
     canvas = love.graphics.newCanvas(WIDTH, HEIGHT);
 end
