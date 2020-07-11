@@ -32,7 +32,7 @@ function love.load()
     background = love.graphics.newCanvas(WIDTH, HEIGHT);
 
     -- create tiles spritebatch
-    spritesheet_tiles = love.graphics.newImage("assets/gfx/spritesheets/tiles.png");
+    spritesheet_tiles = love.graphics.newImage("assets/graphics/spritesheets/tiles.png");
     sprite_tile_1 = love.graphics.newQuad(0, 0, 16, 16, spritesheet_tiles:getDimensions());
 
 end
@@ -47,14 +47,13 @@ function love.draw()
     -- render background
     background:renderTo(function ()
         -- draw background color
-        love.graphics.setColor(18/255, 9/255, 25/255);
-        love.graphics.rectangle("fill", 0, 0, WIDTH, HEIGHT);
+        love.graphics.setBackgroundColor(18/255, 9/255, 25/255);
 
         -- draw tiles
         for _x = 0, 15, 1 do
             for _y = 0, 13, 1 do
                 if not((_x == 0) or (_y == 0) or (_x == 15) or (_y == 13)) then
-                    love.graphics.draw(spritesheet_tiles, _x*16, _y*16);
+                    love.graphics.draw(spritesheet_tiles, sprite_tile_1, _x*16, _y*16);
                 end
             end
         end
@@ -70,4 +69,14 @@ function love.draw()
     love.graphics.draw(canvas, 0, 0, 0, love.graphics.getWidth()/WIDTH, love.graphics.getHeight()/HEIGHT);
 end
 
-
+-- keyboard event
+function love.keypressed(key)
+    -- fullscreen changing
+    if key == "f11" then
+        love.window.setMode(640, 400, {fullscreen = not love.window.getFullscreen});
+    end
+    -- close game
+    if key == "escape" then
+        love.event.quit();
+    end
+end
