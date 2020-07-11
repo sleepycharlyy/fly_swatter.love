@@ -73,7 +73,7 @@ end
 function love.keypressed(key)
     -- fullscreen changing
     if key == "f11" then
-        love.window.setMode(640, 400, {fullscreen = not love.window.getFullscreen});
+        love.window.setFullscreen(not love.window.getFullscreen());
     end
     -- close game
     if key == "escape" then
