@@ -1,4 +1,7 @@
-require("math");
+------------------------------------------------
+--                   MAIN
+--
+------------------------------------------------
 
 -- constants
 GAME_TITLE = "Fly Swatter";
@@ -39,7 +42,9 @@ end
 
 -- called on every tick for calculations
 function love.update(tick)
-
+    -- accomidate for lag
+    if (tick > 0.035) then return; end
+    
 end
 
 -- called on every tick for graphics
@@ -52,7 +57,7 @@ function love.draw()
         -- draw tiles
         for _x = 0, 15, 1 do
             for _y = 0, 13, 1 do
-                if not((_x == 0) or (_y == 0) or (_x == 15) or (_y == 13)) then
+                if ((_x ~= 0) or (_y ~= 0) or (_x ~= 15) or (_y ~= 13)) then
                     love.graphics.draw(spritesheet_tiles, sprite_tile_1, _x*16, _y*16);
                 end
             end
