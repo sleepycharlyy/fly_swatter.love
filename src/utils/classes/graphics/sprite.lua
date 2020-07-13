@@ -1,11 +1,12 @@
 ------------------------------------------------
 --                  SPRITE
---
+-- a simple sprite with different attributes and
+-- customizable animations
 ------------------------------------------------
 
 -- imports 
-local Class = require('class');
-local Vector2 = require('math.vector2');
+local Class = require('utils.classes.class');
+local Vector2 = require('utils.classes.math.vector2');
 
 local Sprite = Class:derive("Sprite");
 
@@ -19,7 +20,7 @@ function Sprite:new(sprite_sheet, width, height, x, y, scale_x, scale_y, angle)
     self.sprite_sheet = sprite_sheet;
     self.quad = love.graphics.newQuad(0, 0, self.size.x, self.size.y, sprite_sheet:getDimensions());
 
-    self.animations = {}
+    self.animations = {};
     self.animation_current = "";
 end
 

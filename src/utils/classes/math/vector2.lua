@@ -1,17 +1,17 @@
 ------------------------------------------------
 --                  VECTOR2
---
+-- a two dimensional vector
 ------------------------------------------------
 
 -- imports
-local Class = require('class');
+local Class = require('utils.classes.class');
 
 local Vector2 = Class:derive("Vector2");
 
 -- vector2 constructor
 function Vector2:new(x, y)
-    self.x = x or 0
-    self.y = y or 0
+    self.x = x or 0;
+    self.y = y or 0;
 end
 
 -- calculate the distance from a vector2 to another vector2 (destination)

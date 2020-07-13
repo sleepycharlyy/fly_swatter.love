@@ -5,8 +5,8 @@
 ------------------------------------------------
 
 -- imports
-local Class = require('class');
-local Vector2 = require('math.vector2');
+local Class = require('utils.classes.class');
+local Vector2 = require('utils.classes.math.vector2');
 
 local Animation = Class.derive("Animation");
 

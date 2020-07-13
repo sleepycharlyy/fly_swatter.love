@@ -3,14 +3,14 @@
 --
 ------------------------------------------------
 
+-- imports
+local Screen = require('utils.classes.graphics.screen');
+
 -- constants
 GAME_TITLE = "Fly Swatter";
 GAME_VERSION = 0.1;
 WIDTH = 256;
 HEIGHT = 224;
-
-local spritesheet_tiles;
-local sprite_tile_1;
 
 -- executes when game starts
 function love.load()
@@ -28,16 +28,8 @@ function love.load()
     -- set default scaling filter
     love.graphics.setDefaultFilter('nearest', 'nearest');
 
-    -- create main canvas
-    canvas = love.graphics.newCanvas(WIDTH, HEIGHT);
-
-    -- create background canvas
-    background = love.graphics.newCanvas(WIDTH, HEIGHT);
-
-    -- create tiles spritebatch
-    spritesheet_tiles = love.graphics.newImage("assets/graphics/spritesheets/tiles.png");
-    sprite_tile_1 = love.graphics.newQuad(0, 0, 16, 16, spritesheet_tiles:getDimensions());
-
+    -- create screen
+    screen = Screen();
 end
 
 -- called on every tick for calculations
@@ -49,29 +41,8 @@ end
 
 -- called on every tick for graphics
 function love.draw()
-    -- render background
-    background:renderTo(function ()
-        -- draw background color
-        love.graphics.setBackgroundColor(18/255, 9/255, 25/255);
-
-        -- draw tiles
-        for _x = 0, 15, 1 do
-            for _y = 0, 13, 1 do
-                if ((_x ~= 0) or (_y ~= 0) or (_x ~= 15) or (_y ~= 13)) then
-                    love.graphics.draw(spritesheet_tiles, sprite_tile_1, _x*16, _y*16);
-                end
-            end
-        end
-    end);
-
-    -- render to main canvas
-    canvas:renderTo(function()
-        -- draw background
-        love.graphics.draw(background, 0, 0);
-    end);
-
-    -- render canvas to screen and scale it to screen size
-    love.graphics.draw(canvas, 0, 0, 0, love.graphics.getWidth()/WIDTH, love.graphics.getHeight()/HEIGHT);
+    -- render screen
+    screen:draw();
 end
 
 -- keyboard event
