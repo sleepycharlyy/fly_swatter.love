@@ -6,7 +6,7 @@
 
 -- imports
 local Canvas = require('utils.classes.graphics.canvas');
-local Background = require('utils.classes.graphics.background');
+local Background = require('utils.classes.graphics.canvasses.background');
 local Vector2 = require('utils.classes.math.vector2');
 
 local Screen = Canvas:derive("Screen");
