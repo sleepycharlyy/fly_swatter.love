@@ -4,7 +4,7 @@
 ------------------------------------------------
 
 -- imports
-local Class = require('utils.classes.class');
+local Class = require('class');
 
 local Vector2 = Class:derive("Vector2");
 

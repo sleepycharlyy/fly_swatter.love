@@ -5,9 +5,10 @@
 ------------------------------------------------
 
 -- imports
-local Canvas = require('utils.classes.graphics.canvas');
-local Background = require('utils.classes.graphics.canvasses.background');
-local Vector2 = require('utils.classes.math.vector2');
+require('globals');
+local Canvas = require('classes.canvas');
+local Background = require('classes.canvasses.background');
+local Vector2 = require('classes.math.vector2');
 
 local Screen = Canvas:derive("Screen");
 

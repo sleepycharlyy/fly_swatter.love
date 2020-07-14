@@ -1,6 +1,6 @@
 ------------------------------------------------
---                   MATH
---  /*deprecated*/
+--              UTILS FUNCTIONS
+--
 ------------------------------------------------
 
 -- (returns integer) distance between two points

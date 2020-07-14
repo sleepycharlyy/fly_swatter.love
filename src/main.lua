@@ -4,14 +4,8 @@
 ------------------------------------------------
 
 -- imports
-local Screen = require('utils.classes.graphics.canvasses.screen');
-
--- constants
-GAME_TITLE = "Fly Swatter";
-GAME_VERSION = 0.1;
-WIDTH = 256;
-HEIGHT = 224;
-HIGH_SCORE = 0;
+require('globals');
+local Screen = require('classes.canvasses.screen');
 
 -- executes when game starts
 function love.load()

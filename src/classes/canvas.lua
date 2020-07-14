@@ -1,11 +1,11 @@
 ------------------------------------------------
---                    CANVAS
+--                   CANVAS
 -- used as parent for other canvas objects
 ------------------------------------------------
 
 -- imports
-local Class = require('utils.classes.class');
-local Vector2 = require('utils.classes.math.vector2');
+local Class = require('class');
+local Vector2 = require('classes.math.vector2');
 
 local Canvas = Class:derive("Canvas");
 

@@ -6,8 +6,8 @@
 ------------------------------------------------
 
 -- imports
-local Canvas = require('utils.classes.graphics.canvas');
-local Vector2 = require('utils.classes.math.vector2');
+local Canvas = require('classes.canvas');
+local Vector2 = require('classes.math.vector2');
 
 local Main_Menu = Canvas:derive("Main_Menu");
 
