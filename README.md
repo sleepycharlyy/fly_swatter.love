@@ -14,4 +14,8 @@ Uses the [LÖVE Engine](https://github.com/love2d/love).
 
 ## License
 
+<<<<<<< HEAD
 This project is unser the GNU General Public License v3.0.  
+=======
+This project is under the GNU General Public License v3.0.
+>>>>>>> b635ec30b5ec334f8ddbf60018b3faf0fd1ec417
