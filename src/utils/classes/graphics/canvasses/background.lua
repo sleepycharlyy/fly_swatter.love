@@ -29,10 +29,14 @@ function Background:draw()
         -- draw background color
         love.graphics.setBackgroundColor(18/255, 9/255, 25/255);
 
+        tile_width = WIDTH/16 - 1;
+        tile_height = HEIGHT/16 - 1;
+
         -- draw tiles
-        for _x = 0, 15, 1 do
-            for _y = 0, 13, 1 do
-                if not((_x == 0) or (_y == 0) or (_x == 15) or (_y == 13)) then
+        for _x = 0, tile_width, 1 do
+            for _y = 0, tile_height, 1 do
+                -- leave a border around screen without tiles
+                if not((_x == 0) or (_y == 0) or (_x == tile_width) or (_y == tile_height)) then
                     love.graphics.setColor(1,1,1);
                     love.graphics.rectangle("fill", _x*16, _y*16, 16, 16);
                     -- background_tileset:draw(0, _x*16, _y*16);
