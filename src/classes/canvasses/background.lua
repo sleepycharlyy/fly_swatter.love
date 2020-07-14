@@ -42,8 +42,6 @@ function Background:draw()
             for _y = 0, tile_height, 1 do
                 -- leave a border around screen without tiles
                 if not((_x == 0) or (_y == 0) or (_x == tile_width) or (_y == tile_height)) then
-                    --[[ love.graphics.setColor(1,1,1);
-                    love.graphics.rectangle("fill", _x*16, _y*16, 16, 16); ]]--
                     self.tile_1:draw(_x*16, _y*16)
                 end
             end
