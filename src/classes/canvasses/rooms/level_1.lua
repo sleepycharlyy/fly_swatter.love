@@ -11,7 +11,7 @@ local Vector2 = require('classes.math.vector2');
 
 local Level_1 = Canvas:derive("Level_1");
 
--- screen constructor
+-- level constructor
 function Level_1:new()
     self.position = Vector2(0, 0)
     self.size = Vector2(WIDTH, HEIGHT);
@@ -24,13 +24,13 @@ function Level_1:new()
     self.player = Player();
 end
 
--- screen update event
+-- level update event
 function Level_1:update(tick)
     -- entities
     self.player:update(tick);
 end
 
--- screen draw event
+-- level draw event
 function Level_1:draw()
     -- render to screen canvas
         self.canvas:renderTo(function()

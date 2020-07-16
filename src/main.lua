@@ -7,6 +7,8 @@
 require('globals');
 local Screen = require('classes.canvasses.screen');
 
+local Sprite = require('classes.graphics.sprite');
+
 -- executes when game starts
 function love.load()
     -- set title
@@ -20,11 +22,19 @@ function love.load()
         minheight = HEIGHT,
     });
 
+    -- hide default cursor 
+    love.mouse.setVisible(false);
+
     -- set default scaling filter
     love.graphics.setDefaultFilter('nearest', 'nearest');
 
     -- create screen
     screen = Screen();
+
+
+
+    sprite_sheet = love.graphics.newImage("assets/graphics/sprite_sheets/cursor.png");
+    sprite = Sprite(sprite_sheet, 16, 40, 32, 16, 1, 1, 0);
 end
 
 -- called on every tick for calculations
@@ -40,6 +50,8 @@ end
 function love.draw()
     -- render screen
     screen:draw();
+
+    sprite:draw();
 end
 
 -- keyboard event

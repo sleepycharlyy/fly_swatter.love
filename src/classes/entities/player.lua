@@ -16,8 +16,8 @@ function Player:new()
     self.size = Vector2(16, 40);
     self.origin = Vector2(8, 0);
 
-    self.sprite_sheet = love.graphics.newImage("assets/graphics/cursor.png");
-    self.sprite = Sprite(self.sprite_sheet, self.size.x, self.size.y, self.position.x, self.position.y, 0, 0, 0, self.origin.x, self.origin.y);
+    self.sprite_sheet = love.graphics.newImage("assets/graphics/sprite_sheets/cursor.png");
+    self.sprite = Sprite(self.sprite_sheet, self.size.x, self.size.y, self.position.x, self.position.y, 1, 1, 0, self.origin.x, self.origin.y);
 end
 
 -- player update event
@@ -32,7 +32,7 @@ function Player:draw()
     -- set sprite position to position of player
     self.sprite.position.x = self.position.x;
     self.sprite.position.y = self.position.y;
-
+    
     -- draw sprite
     self.sprite:draw();
 
