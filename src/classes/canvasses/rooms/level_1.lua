@@ -7,6 +7,7 @@
 local Canvas = require('classes.canvas');
 local Background = require('classes.canvasses.background');
 local Player = require('classes.entities.player');
+local Fly = require('classes.entities.fly');
 local Vector2 = require('classes.math.vector2');
 
 local Level_1 = Canvas:derive("Level_1");
@@ -21,12 +22,15 @@ function Level_1:new()
     self.background = Background();
 
     -- entities 
+    self.fly = Fly();
     self.player = Player();
+
 end
 
 -- level update event
 function Level_1:update(tick)
     -- entities
+    self.fly:update(tick);
     self.player:update(tick);
 end
 
@@ -38,6 +42,7 @@ function Level_1:draw()
            self.background:draw();
 
            -- draw entities
+           self.fly:draw();
            self.player:draw();
         end);
 

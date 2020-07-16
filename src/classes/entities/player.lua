@@ -1,5 +1,5 @@
 ------------------------------------------------
---                   PLAYER (ENTITY)
+--                PLAYER (ENTITY)
 -- player object (cursor)
 ------------------------------------------------
 
@@ -47,7 +47,7 @@ function Player:mousepressed(x, y, button, istouch, presses)
 
 
     -- handle mouse press
-    -- TODO
+    -- TODO: add to score and deactivate fly when clicked
 
     -- if touch move player to current press position
     if istouch then

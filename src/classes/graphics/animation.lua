@@ -8,7 +8,7 @@
 local Class = require('class');
 local Vector2 = require('classes.math.vector2');
 
-local Animation = Class.derive("Animation");
+local Animation = Class:derive("Animation");
 
 -- animation constructor
 function Animation:new(width, height, offset, frame_max, fps)
@@ -16,7 +16,7 @@ function Animation:new(width, height, offset, frame_max, fps)
     self.timer = 1 / self.fps;
     self.frame = 1;
     self.frame_max = frame_max;
-    self.offset = 0;
+    self.offset = offset;
     self.size = Vector2(width, height);
 end
 
@@ -44,7 +44,7 @@ function Animation:update(tick, quad)
         if (self.frame > self.frame_max) then
             self.frame = 1;
         end
-        self.offset = self.size.x * self.frame;
+        self.offset = (self.size.x * self.frame) - self.size.x;
         -- apply to quad
         self:apply(quad);
     end
