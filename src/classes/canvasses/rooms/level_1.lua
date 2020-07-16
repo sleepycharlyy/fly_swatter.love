@@ -45,4 +45,10 @@ function Level_1:draw()
     love.graphics.draw(self.canvas, self.position.x, self.position.y);
 end
 
+-- mouse pressed event
+function Level_1:mousepressed(x, y, button, istouch, presses)
+    -- pass function to player
+    self.player:mousepressed(x, y, button, istouch, presses);
+end
+
 return Level_1

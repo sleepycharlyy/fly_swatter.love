@@ -12,19 +12,21 @@ local Player = Entity:derive("Player");
 
 -- player constructor
 function Player:new()
-    self.position = Vector2(0, 0);
+    self.position = Vector2(WIDTH/2, HEIGHT/2); -- center player at start of the room
     self.size = Vector2(16, 40);
-    self.origin = Vector2(8, 0);
 
-    self.sprite_sheet = love.graphics.newImage("assets/graphics/sprite_sheets/cursor.png");
-    self.sprite = Sprite(self.sprite_sheet, self.size.x, self.size.y, self.position.x, self.position.y, 1, 1, 0, self.origin.x, self.origin.y);
+    self.sprite_sheet = love.graphics.newImage("assets/graphics/sprite_sheets/player.png");
+    self.sprite = Sprite(self.sprite_sheet, self.size.x, self.size.y, self.position.x, self.position.y, 1, 1, 0);
 end
 
 -- player update event
 function Player:update(tick)
-    -- set player position to mouse position
-    self.position.x = love.mouse.getX();
-    self.position.y = love.mouse.getY();
+    -- check if on mobile or nahh
+    if(OS ~= "Android" or OS ~= "iOS") then
+        -- set player position to mouse position (additional calculations to make the mouse position relative to the screen size)
+        self.position.x = (love.mouse.getX()* WIDTH) / love.graphics.getWidth();
+        self.position.y = (love.mouse.getY() * HEIGHT) / love.graphics.getHeight();
+    end
 end
 
 -- player draw event
@@ -35,8 +37,24 @@ function Player:draw()
     
     -- draw sprite
     self.sprite:draw();
+end
 
-    -- todo: make drawing functional idk
+-- mouse pressed event
+function Player:mousepressed(x, y, button, istouch, presses)
+    --[[
+        NOTE: i got an idea to use the 'presses' variable for maybe sum kinda special attack when screen is double clicked / tapped
+    ]]--
+
+
+    -- handle mouse press
+    -- TODO
+
+    -- if touch move player to current press position
+    if istouch then
+        -- set player position to press position (additional calculations to make the mouse position relative to the screen size)
+        self.position.x = (x * WIDTH) / love.graphics.getWidth();
+        self.position.y = (y * HEIGHT) / love.graphics.getHeight();
+    end
 end
 
 return Player;

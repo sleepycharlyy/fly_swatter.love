@@ -1,18 +1,18 @@
 -- TODO: make class
 
 ------------------------------------------------
---             GAME_OVER (CANVAS)
--- game over screen
+--                 HUD (CANVAS)
+-- hud overlay
 ------------------------------------------------
 
 -- imports
 local Canvas = require('classes.canvas');
 local Vector2 = require('classes.math.vector2');
 
-local Game_Over = Canvas:derive("Game_Over");
+local HUD = Canvas:derive("HUD");
 
 -- gameover constructor
-function Game_Over:new()
+function HUD:new()
     self.position = Vector2(0, 0)
     self.size = Vector2(WIDTH, HEIGHT);
     
@@ -20,14 +20,14 @@ function Game_Over:new()
 end
 
 -- gameover draw event
-function Game_Over:draw()
-    -- render gameover screen
+function HUD:draw()
+    -- render hud screen
     self.canvas:renderTo(function ()
     end);
 
-    -- draw gameover
+    -- draw hud
     love.graphics.draw(self.canvas, self.position.x, self.position.y);
 end
 
 
-return Game_Over
+return HUD

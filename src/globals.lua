@@ -5,9 +5,10 @@
 
 -- constants
 GAME_TITLE = "Fly Swatter";
-GAME_VERSION = 0.1;
+GAME_VERSION = "a.0.1.3";
 WIDTH = 256;
 HEIGHT = 224;
+OS = "Linux"; -- The current operating system. "OS X", "Windows", "Linux", "Android" or "iOS"
 
 -- globals
 HIGH_SCORE = 0;

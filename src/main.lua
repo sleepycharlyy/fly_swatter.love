@@ -7,7 +7,6 @@
 require('globals');
 local Screen = require('classes.canvasses.screen');
 
-local Sprite = require('classes.graphics.sprite');
 
 -- executes when game starts
 function love.load()
@@ -22,19 +21,19 @@ function love.load()
         minheight = HEIGHT,
     });
 
-    -- hide default cursor 
-    love.mouse.setVisible(false);
+    -- get os
+    OS = love.system.getOS();
+
+    -- hide default cursor (desktop)
+    if(love.mouse.isCursorSupported() == true) then
+        love.mouse.setVisible(false);
+    end
 
     -- set default scaling filter
     love.graphics.setDefaultFilter('nearest', 'nearest');
 
     -- create screen
     screen = Screen();
-
-
-
-    sprite_sheet = love.graphics.newImage("assets/graphics/sprite_sheets/cursor.png");
-    sprite = Sprite(sprite_sheet, 16, 40, 32, 16, 1, 1, 0);
 end
 
 -- called on every tick for calculations
@@ -50,11 +49,9 @@ end
 function love.draw()
     -- render screen
     screen:draw();
-
-    sprite:draw();
 end
 
--- keyboard event
+-- keyboard press event
 function love.keypressed(key)
     -- fullscreen changing
     if key == "f11" then
@@ -64,4 +61,10 @@ function love.keypressed(key)
     if key == "escape" then
         love.event.quit();
     end
+end
+
+-- mouse press event
+function love.mousepressed(x, y, button, istouch, presses)
+    -- pass to screen canvas
+    screen:mousepressed(x, y, button, istouch, presses);
 end
