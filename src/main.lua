@@ -1,3 +1,5 @@
+-- TODO: uhm no portrait mode in android or ios. that shit looks weeird somehow manage to get that out pls  
+
 ------------------------------------------------
 --                   MAIN
 --
