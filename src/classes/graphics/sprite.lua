@@ -11,11 +11,12 @@ local Vector2 = require('classes.math.vector2');
 local Sprite = Class:derive("Sprite");
 
 -- sprite constructor
-function Sprite:new(sprite_sheet, width, height, x, y, scale_x, scale_y, angle)
+function Sprite:new(sprite_sheet, width, height, x, y, scale_x, scale_y, angle, origin_x, origin_y)
     self.size = Vector2(width, height)
     self.position = Vector2(x, y);
     self.scale = Vector2(scale_x or 1, scale_y or 1);
     self.angle = angle or 0;
+    self.origin = Vector2(origin_x or 0, origin_y or 0);
 
     self.sprite_sheet = sprite_sheet;
     self.quad = love.graphics.newQuad(0, 0, self.size.x, self.size.y, sprite_sheet:getDimensions());
@@ -34,7 +35,7 @@ end
 
 -- sprite draw function
 function Sprite:draw()
-    love.graphics.draw(self.sprite_sheet, self.quad, self.position.x, self.position.y, self.angle, self.scale.x, self.scale.y, self.size.x / 2, self.size.y / 2);
+    love.graphics.draw(self.sprite_sheet, self.quad, self.position.x, self.position.y, self.angle, self.scale.x, self.scale.y, self.size.x / 2, self.size.y / 2, self.origin.x, self.origin.y);
 end
 
 

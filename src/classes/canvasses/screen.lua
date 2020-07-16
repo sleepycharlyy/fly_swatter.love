@@ -7,8 +7,10 @@
 -- imports
 require('globals');
 local Canvas = require('classes.canvas');
-local Background = require('classes.canvasses.background');
 local Vector2 = require('classes.math.vector2');
+-- rooms
+local Level_1 = require('classes.canvasses.rooms.level_1')
+-- TODO: do other rooms
 
 local Screen = Canvas:derive("Screen");
 
@@ -19,15 +21,56 @@ function Screen:new()
 
     self.canvas = love.graphics.newCanvas(self.size.x, self.size.y);
 
-    self.background = Background();
+    -- rooms
+    self.level_1 = Level_1();
+end
+
+-- screen update event
+function Screen:update(tick)
+    -- update rooms
+    if CURRENT_ROOM == 0 then
+        -- main_menu
+    elseif CURRENT_ROOM == 1 then
+        -- options_menu
+    elseif CURRENT_ROOM == 2 then
+        -- pause_menu
+    elseif CURRENT_ROOM == 3 then
+        -- share_menu
+    elseif CURRENT_ROOM == 4 then
+        -- level_1
+        self.level_1:update(tick);
+    elseif CURRENT_ROOM == 5 then
+        -- level_2
+    elseif CURRENT_ROOM == 6 then
+        -- level_3
+    elseif CURRENT_ROOM == 7 then
+        -- level_4
+    end
 end
 
 -- screen draw event
 function Screen:draw()
     -- render to screen canvas
         self.canvas:renderTo(function()
-            -- draw background
-           self.background:draw();
+           -- draw rooms
+            if CURRENT_ROOM == 0 then
+                -- main_menu
+            elseif CURRENT_ROOM == 1 then
+                -- options_menu
+            elseif CURRENT_ROOM == 2 then
+                -- pause_menu
+            elseif CURRENT_ROOM == 3 then
+                -- share_menu
+            elseif CURRENT_ROOM == 4 then
+                -- level_1
+                self.level_1:draw();
+            elseif CURRENT_ROOM == 5 then
+                -- level_2
+            elseif CURRENT_ROOM == 6 then
+                -- level_3
+            elseif CURRENT_ROOM == 7 then
+                -- level_4
+            end
         end);
 
     -- draw screen scaled to window size

@@ -31,7 +31,9 @@ end
 function love.update(tick)
     -- accomidate for lag
     if (tick > 0.035) then return; end
-    
+
+    -- update
+    screen:update(tick);
 end
 
 -- called on every tick for graphics
