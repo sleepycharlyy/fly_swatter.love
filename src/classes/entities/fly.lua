@@ -15,7 +15,7 @@ local Fly = Entity:derive("Fly");
 function Fly:new()
     self.position = Vector2(WIDTH/2, HEIGHT/2); -- center fly at start of the room
     self.size = Vector2(16, 16);
-    self.state = 0; -- 0: deactive, 1: active
+    self.state = 1; -- 0: deactive, 1: active
 
     -- sprite
     self.sprite_sheet = love.graphics.newImage("assets/graphics/sprite_sheets/fly.png");
@@ -32,10 +32,13 @@ function Fly:update(tick)
     if self.state == 1 then
         -- update sprite (animation)
         self.sprite:update(tick);
+        self.sprite.position = self.position;
 
-        -- check if out of bounds when yes deactivate
-        if (self.poisiton.x > WIDTH or self.position.x < 0 or self.positon.y > HEIGHT or self.position.y < 0) then
-            self:deactivate();
+        -- check if out of bounds when yes deactivate (only when active)
+        if self.active == true then
+            if (self.position.x > WIDTH or self.position.x < 0 or self.position.y > HEIGHT or self.position.y < 0) then
+                self:deactivate();
+            end
         end
     end
 end
@@ -52,14 +55,14 @@ end
 function Fly:activate()
     -- TODO: spawn on corner of screen
 
-    -- deactivate
-    self.active = false;
+    -- activate
+    self.active = true;
 end
 
 function Fly:deactivate()
     -- move out of bounds when deactivated
-    self.position.x = WIDTH*2
-    self.position.y = HEIHGT*2
+    self.position.x = WIDTH*2;
+    self.position.y = HEIGHT*2;
 
     -- deactivate
     self.active = false;

@@ -40,14 +40,24 @@ function Player:draw()
 end
 
 -- mouse pressed event
-function Player:mousepressed(x, y, button, istouch, presses)
+function Player:mousepressed(x, y, button, istouch, presses, level)
     --[[
         NOTE: i got an idea to use the 'presses' variable for maybe sum kinda special attack when screen is double clicked / tapped
     ]]--
 
 
     -- handle mouse press
-    -- TODO: add to score and deactivate fly when clicked
+    -- go through every entity in list of level and check if its fly 
+    for i = 1, table.getn(level.entities), 1 do
+        if level.entities[i]:get_type() == "Fly" then
+            -- check if mouse if over fly when yes destroy fly
+            -- TODO: this check doenst work  maybe use utils distance to 
+            if level.entities[i].position:get_distance_to(Vector2(love.mouse.getX(), love.mouse.getY())) < 40 then 
+                level.entities[i]:deactivate();
+            end
+        end
+    end
+
 
     -- if touch move player to current press position
     if istouch then

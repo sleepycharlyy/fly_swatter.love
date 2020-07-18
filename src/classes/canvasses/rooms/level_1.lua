@@ -21,17 +21,17 @@ function Level_1:new()
 
     self.background = Background();
 
-    -- entities 
-    self.fly = Fly();
-    self.player = Player();
+    -- entities list (they are drawn to screen in the order they are added to the list)
+    self.entities = {Fly(), Player()};
 
 end
 
 -- level update event
 function Level_1:update(tick)
-    -- entities
-    self.fly:update(tick);
-    self.player:update(tick);
+    -- update entities (go through entity list and update every single one)
+    for i = 1, table.getn(self.entities), 1 do
+        self.entities[i]:update(tick);
+    end
 end
 
 -- level draw event
@@ -41,9 +41,10 @@ function Level_1:draw()
             -- draw background
            self.background:draw();
 
-           -- draw entities
-           self.fly:draw();
-           self.player:draw();
+           -- draw entities (go through entity list and draw every single one)
+           for i = 1, table.getn(self.entities), 1 do
+            self.entities[i]:draw();
+           end
         end);
 
     -- draw screen scaled to window size
@@ -52,8 +53,12 @@ end
 
 -- mouse pressed event
 function Level_1:mousepressed(x, y, button, istouch, presses)
-    -- pass function to player
-    self.player:mousepressed(x, y, button, istouch, presses);
+    -- pass function to player and pass self (go through entities list and check for player entitiy and then pass it)
+    for i = 1, table.getn(self.entities), 1 do
+        if self.entities[i]:get_type() == "Player" then
+            self.entities[i]:mousepressed(x, y, button, istouch, presses, self);
+        end
+    end
 end
 
 return Level_1
