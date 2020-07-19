@@ -14,11 +14,6 @@ function Vector2:new(x, y)
     self.y = y or 0;
 end
 
--- calculate the distance from a vector2 to another vector2 (destination)
-function Vector2:get_distance_to(destination) 
-    return math.sqrt(math.abs((destination.y - self.y)^2 + (destination.x - self.y)^2));
-end
-
 -- TODO: other vector functions
 
 return Vector2;

@@ -4,6 +4,7 @@
 ------------------------------------------------
 
 -- imports
+require('utils');
 local Entity = require('classes.entity');
 local Vector2 = require('classes.math.vector2');
 local Sprite = require('classes.graphics.sprite');
@@ -50,9 +51,11 @@ function Player:mousepressed(x, y, button, istouch, presses, level)
     -- go through every entity in list of level and check if its fly 
     for i = 1, table.getn(level.entities), 1 do
         if level.entities[i]:get_type() == "Fly" then
+            -- calculate position of fly and accomidate screen size
+            x = level.entities[i].position.x * (love.graphics.getWidth() / WIDTH);
+            y = level.entities[i].position.y * (love.graphics.getHeight() / HEIGHT);
             -- check if mouse if over fly when yes destroy fly
-            -- TODO: this check doenst work  maybe use utils distance to 
-            if level.entities[i].position:get_distance_to(Vector2(love.mouse.getX(), love.mouse.getY())) < 40 then 
+            if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 16 then
                 level.entities[i]:deactivate();
             end
         end

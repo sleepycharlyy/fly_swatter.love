@@ -34,11 +34,12 @@ function Fly:update(tick)
         self.sprite:update(tick);
         self.sprite.position = self.position;
 
-        -- check if out of bounds when yes deactivate (only when active)
-        if self.active == true then
-            if (self.position.x > WIDTH or self.position.x < 0 or self.position.y > HEIGHT or self.position.y < 0) then
+        -- movement
+        Fly:move(tick);
+
+        -- check if out of bounds when yes deactivate
+        if (self.position.x > WIDTH or self.position.x < 0 or self.position.y > HEIGHT or self.position.y < 0) then
                 self:deactivate();
-            end
         end
     end
 end
@@ -52,20 +53,31 @@ function Fly:draw()
     end
 end
 
+-- activate (change state to 1) fly
 function Fly:activate()
     -- TODO: spawn on corner of screen
 
     -- activate
-    self.active = true;
+    self.state = 1;
 end
 
+-- deactivate (change state to 0) fly
 function Fly:deactivate()
     -- move out of bounds when deactivated
     self.position.x = WIDTH*2;
     self.position.y = HEIGHT*2;
 
     -- deactivate
-    self.active = false;
+    self.state = 0;
+end
+
+-- move fly into a random direction
+function Fly:move(tick)
+    -- move fly in random direction
+    angle = math.random(-360,360);
+    -- TODO: MAKE THIS FUCKER WORK WIDJAIDJWAIDJIAWJD (error: attempt index field 'position' a nil value WTF IDK)
+    self.position.x = (self.position.x + math.cos(angle) * 1.2 * tick);
+    self.position.y = (self.position.y + math.sin(angle) * 1.2 * tick);
 end
 
 return Fly

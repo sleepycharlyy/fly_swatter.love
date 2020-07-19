@@ -5,7 +5,7 @@
 
 -- (returns integer) distance between two points
 function get_distance(x1, y1, x2, y2)
-    
+    return math.sqrt(math.abs((y2 - y1)^2 + (x2 - x1)^2));
 end
 
 -- (returns boolean) checks wether two boxes collide
