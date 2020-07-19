@@ -1,5 +1,7 @@
 # Fly Swatter
 
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y11Y0ET)
+
 ## About
 
 a Game inspired by the Mario Paint minigame "Gnat Attack".  
