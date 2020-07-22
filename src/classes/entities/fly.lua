@@ -35,7 +35,7 @@ function Fly:update(tick)
         self.sprite.position = self.position;
 
         -- movement
-        Fly:move(tick);
+        self:move(tick);
 
         -- check if out of bounds when yes deactivate
         if (self.position.x > WIDTH or self.position.x < 0 or self.position.y > HEIGHT or self.position.y < 0) then
@@ -75,7 +75,6 @@ end
 function Fly:move(tick)
     -- move fly in random direction
     angle = math.random(-360,360);
-    -- TODO: MAKE THIS FUCKER WORK WIDJAIDJWAIDJIAWJD (error: attempt index field 'position' a nil value WTF IDK)
     self.position.x = (self.position.x + math.cos(angle) * 1.2 * tick);
     self.position.y = (self.position.y + math.sin(angle) * 1.2 * tick);
 end
