@@ -17,6 +17,10 @@ function Level_1:new()
     self.position = Vector2(0, 0)
     self.size = Vector2(WIDTH, HEIGHT);
 
+    -- timer
+    self.timer = 0; -- timer
+    self.timerlength = 60; -- how long the level is going for
+
     self.canvas = love.graphics.newCanvas(self.size.x, self.size.y);
 
     self.background = Background();
@@ -32,6 +36,10 @@ function Level_1:update(tick)
     for i = 1, table.getn(self.entities), 1 do
         self.entities[i]:update(tick);
     end
+
+    -- timer
+    self.timer = self.timer + tick;
+    if(self.timer > self.timerlength) then self:finished() end; -- levels done 
 end
 
 -- level draw event
@@ -45,6 +53,9 @@ function Level_1:draw()
            for i = 1, table.getn(self.entities), 1 do
             self.entities[i]:draw();
            end
+
+           -- TODO: FIGURE THE HUD STUFF OUT (+ the timer madness (put it in here or in hud clas IDK))
+
         end);
 
     -- draw screen scaled to window size
@@ -59,6 +70,10 @@ function Level_1:mousepressed(x, y, button, istouch, presses)
             self.entities[i]:mousepressed(x, y, button, istouch, presses, self);
         end
     end
+end
+
+function Level_1:finished()
+    -- TODO: when level 1 is finished (times up) 
 end
 
 return Level_1

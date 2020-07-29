@@ -14,7 +14,7 @@ local Player = Entity:derive("Player");
 -- player constructor
 function Player:new()
     self.position = Vector2(WIDTH/2, HEIGHT/2); -- center player at start of the room
-    self.size = Vector2(16, 40);
+    self.size = Vector2(16, 60);
 
     self.sprite_sheet = love.graphics.newImage("assets/graphics/sprite_sheets/player.png");
     self.sprite = Sprite(self.sprite_sheet, self.size.x, self.size.y, self.position.x, self.position.y, 1, 1, 0);
@@ -23,7 +23,7 @@ end
 -- player update event
 function Player:update(tick)
     -- check if on mobile or nahh
-    if(OS ~= "Android" or OS ~= "iOS") then
+    if(OS ~= "Android" and OS ~= "iOS") then
         -- set player position to mouse position (additional calculations to make the mouse position relative to the screen size)
         self.position.x = (love.mouse.getX()* WIDTH) / love.graphics.getWidth();
         self.position.y = (love.mouse.getY() * HEIGHT) / love.graphics.getHeight();

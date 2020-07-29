@@ -13,9 +13,15 @@ local Fly = Entity:derive("Fly");
 
 -- fly constructor
 function Fly:new()
-    self.position = Vector2(WIDTH/2, HEIGHT/2); -- center fly at start of the room
+    self.position = Vector2(WIDTH/2, HEIGHT); -- center fly at start of the room
     self.size = Vector2(16, 16);
     self.state = 1; -- 0: deactive, 1: active
+    self.speed = 80; -- entity speed
+    self.angle = 0 -- angle in which direction the fly flies to
+
+    -- timer
+    self.timer = 0; -- timer
+    self.timer_length = 1; -- how many seconds long the timer goes on till it resets
 
     -- sprite
     self.sprite_sheet = love.graphics.newImage("assets/graphics/sprite_sheets/fly.png");
@@ -41,6 +47,10 @@ function Fly:update(tick)
         if (self.position.x > WIDTH or self.position.x < 0 or self.position.y > HEIGHT or self.position.y < 0) then
                 self:deactivate();
         end
+
+        -- update timer
+        self.timer = self.timer + tick;
+        if(self.timer > self.timer_length) then self.timer = 0; end
     end
 end
 
@@ -73,10 +83,11 @@ end
 
 -- move fly into a random direction
 function Fly:move(tick)
-    -- move fly in random direction
-    angle = math.random(-360,360);
-    self.position.x = (self.position.x + math.cos(angle) * 1.2 * tick);
-    self.position.y = (self.position.y + math.sin(angle) * 1.2 * tick);
+    -- set random angle (every time the timer hits 0)
+    if (self.timer == 0) then self.angle = math.random(-360,360); end
+    -- move fly 
+    self.position.x = (self.position.x + math.cos(self.angle) * self.speed * tick);
+    self.position.y = (self.position.y + math.sin(self.angle) * self.speed * tick);
 end
 
 return Fly
