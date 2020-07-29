@@ -9,7 +9,7 @@ require('globals');
 local Canvas = require('classes.canvas');
 local Vector2 = require('classes.math.vector2');
 -- rooms
-local Level_1 = require('classes.canvasses.rooms.level_1')
+local Level = require('classes.canvasses.rooms.level')
 -- TODO: do other rooms
 
 local Screen = Canvas:derive("Screen");
@@ -22,7 +22,7 @@ function Screen:new()
     self.canvas = love.graphics.newCanvas(self.size.x, self.size.y);
 
     -- rooms
-    self.level_1 = Level_1();
+    self.level = Level();
 end
 
 -- screen update event
@@ -37,14 +37,10 @@ function Screen:update(tick)
     elseif CURRENT_ROOM == 3 then
         -- share_menu
     elseif CURRENT_ROOM == 4 then
-        -- level_1
-        self.level_1:update(tick);
+        -- level
+        self.level:update(tick);
     elseif CURRENT_ROOM == 5 then
-        -- level_2
-    elseif CURRENT_ROOM == 6 then
-        -- level_3
-    elseif CURRENT_ROOM == 7 then
-        -- level_4
+        -- game_over
     end
 end
 
@@ -62,14 +58,10 @@ function Screen:draw()
             elseif CURRENT_ROOM == 3 then
                 -- share_menu
             elseif CURRENT_ROOM == 4 then
-                -- level_1
-                self.level_1:draw();
+                -- level
+                self.level:draw();
             elseif CURRENT_ROOM == 5 then
-                -- level_2
-            elseif CURRENT_ROOM == 6 then
-                -- level_3
-            elseif CURRENT_ROOM == 7 then
-                -- level_4
+                -- game_over
             end
         end);
 
@@ -89,14 +81,10 @@ function Screen:mousepressed(x, y, button, istouch, presses)
     elseif CURRENT_ROOM == 3 then
         -- share_menu
     elseif CURRENT_ROOM == 4 then
-        -- level_1
-        self.level_1:mousepressed(x, y, button, istouch, presses);
+        -- level
+        self.level:mousepressed(x, y, button, istouch, presses);
     elseif CURRENT_ROOM == 5 then
-        -- level_2
-    elseif CURRENT_ROOM == 6 then
-        -- level_3
-    elseif CURRENT_ROOM == 7 then
-        -- level_4
+        -- game_over
     end
 end
 

@@ -1,6 +1,4 @@
 -- TODO: uhm no portrait mode in android or ios. that shit looks weeird somehow manage to get that out pls  
--- TODO: ERRORS in FLY.lua
--- TODO: player sprite (origin) a bit lower its not centered at the swatter yknow
 
 ------------------------------------------------
 --                   MAIN

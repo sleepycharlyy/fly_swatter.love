@@ -46,6 +46,10 @@ function Fly:update(tick)
         -- check if out of bounds when yes deactivate
         if (self.position.x > WIDTH or self.position.x < 0 or self.position.y > HEIGHT or self.position.y < 0) then
                 self:deactivate();
+                -- player dies => move to gameover screen
+                CURRENT_ROOM = 5 -- move to game_over room
+                if (CURRENT_SCORE > HIGH_SCORE) then HIGH_SCORE = CURRENT_SCORE; end -- check if new highscore
+                CURRENT_SCORE = 0; -- reset current score
         end
 
         -- update timer
