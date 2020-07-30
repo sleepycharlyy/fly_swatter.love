@@ -9,7 +9,8 @@ require('globals');
 local Canvas = require('classes.canvas');
 local Vector2 = require('classes.math.vector2');
 -- rooms
-local Level = require('classes.canvasses.rooms.level')
+local Level = require('classes.canvasses.rooms.level');
+local Game_Over = require('classes.canvasses.rooms.game_over');
 -- TODO: do other rooms
 
 local Screen = Canvas:derive("Screen");
@@ -23,6 +24,7 @@ function Screen:new()
 
     -- rooms
     self.level = Level();
+    self.game_over = Game_Over();
 end
 
 -- screen update event
@@ -61,7 +63,7 @@ function Screen:draw()
                 -- level
                 self.level:draw();
             elseif CURRENT_ROOM == 5 then
-                -- game_over
+                self.game_over:draw();
             end
         end);
 

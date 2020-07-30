@@ -13,7 +13,7 @@ local Fly = Entity:derive("Fly");
 
 -- fly constructor
 function Fly:new()
-    self.position = Vector2(WIDTH/2, HEIGHT); -- center fly at start of the room
+    self.position = Vector2(WIDTH/2, math.random(32, HEIGHT-32)); -- spawn fly at bottom of screen on random x axis
     self.size = Vector2(16, 16);
     self.state = 1; -- 0: deactive, 1: active
     self.speed = 80; -- entity speed

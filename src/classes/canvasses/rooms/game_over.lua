@@ -2,7 +2,7 @@
 
 ------------------------------------------------
 --             GAME_OVER (CANVAS)
--- game over overlay
+-- game over screen
 ------------------------------------------------
 
 -- imports
@@ -23,6 +23,13 @@ end
 function Game_Over:draw()
     -- render gameover screen
     self.canvas:renderTo(function ()
+        love.graphics.setColor(0,0,0); -- set to black
+        love.graphics.rectangle("fill", 0, 0, WIDTH, HEIGHT); -- black background
+        love.graphics.setColor(1,1,1); -- set color to white
+        love.graphics.print("Game Over", WIDTH/2, HEIGHT/2); -- game over text
+        love.graphics.print("Highscore: "..HIGH_SCORE, 0, 0); -- highscore text
+        love.graphics.print("Score: "..CURRENT_SCORE, 0, 0); -- current score text
+
     end);
 
     -- draw gameover

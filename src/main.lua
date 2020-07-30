@@ -8,7 +8,7 @@
 -- imports
 require('globals');
 local Screen = require('classes.canvasses.screen');
-
+local Debug = require('classes.canvasses.debug');
 
 -- executes when game starts
 function love.load()
@@ -36,6 +36,9 @@ function love.load()
 
     -- create screen
     screen = Screen();
+
+    -- create debug overlay
+    debug = Debug();
 end
 
 -- called on every tick for calculations
@@ -51,6 +54,11 @@ end
 function love.draw()
     -- render screen
     screen:draw();
+
+    -- render debug overlay
+    if(DEBUG == true) then
+        debug:draw();
+    end
 end
 
 -- keyboard press event
