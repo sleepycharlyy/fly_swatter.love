@@ -4,7 +4,7 @@
 
 ## About
 
-a Game inspired by the Mario Paint minigame "Gnat Attack".  
+A game inspired by the Mario Paint minigame "Gnat Attack".  
 Made with LOVE2D/LÖVE in lua.  
 [itch.io Page](sleepycharlyy.itch.io/fly-swatter)  
 
