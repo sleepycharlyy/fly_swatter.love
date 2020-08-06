@@ -21,7 +21,7 @@ function Player:new()
 end
 
 -- player update event
-function Player:update(tick)
+function Player:update(delta_time)
     -- check if on mobile or nahh
     if(OS ~= "Android" and OS ~= "iOS") then
         -- set player position to mouse position (additional calculations to make the mouse position relative to the screen size)

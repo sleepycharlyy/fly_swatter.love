@@ -28,7 +28,7 @@ function Screen:new()
 end
 
 -- screen update event
-function Screen:update(tick)
+function Screen:update(delta_time)
     -- update rooms
     if CURRENT_ROOM == 0 then
         -- main_menu
@@ -40,7 +40,7 @@ function Screen:update(tick)
         -- share_menu
     elseif CURRENT_ROOM == 4 then
         -- level
-        self.level:update(tick);
+        self.level:update(delta_time);
     elseif CURRENT_ROOM == 5 then
         -- game_over
     end

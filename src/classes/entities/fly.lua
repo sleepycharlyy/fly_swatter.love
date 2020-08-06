@@ -34,14 +34,14 @@ function Fly:new()
 end
 
 -- fly update event
-function Fly:update(tick)
+function Fly:update(delta_time)
     if self.state == 1 then
         -- update sprite (animation)
-        self.sprite:update(tick);
+        self.sprite:update(delta_time);
         self.sprite.position = self.position;
 
         -- movement
-        self:move(tick);
+        self:move(delta_time);
 
         -- check if out of bounds when yes deactivate
         if (self.position.x > WIDTH or self.position.x < 0 or self.position.y > HEIGHT or self.position.y < 0) then
@@ -53,7 +53,7 @@ function Fly:update(tick)
         end
 
         -- update timer
-        self.timer = self.timer + tick;
+        self.timer = self.timer + delta_time;
         if(self.timer > self.timer_length) then self.timer = 0; end
     end
 end
@@ -86,12 +86,12 @@ function Fly:deactivate()
 end
 
 -- move fly into a random direction
-function Fly:move(tick)
+function Fly:move(delta_time)
     -- set random angle (every time the timer hits 0)
     if (self.timer == 0) then self.angle = math.random(-360,360); end
     -- move fly 
-    self.position.x = (self.position.x + math.cos(self.angle) * self.speed * tick);
-    self.position.y = (self.position.y + math.sin(self.angle) * self.speed * tick);
+    self.position.x = (self.position.x + math.cos(self.angle) * self.speed * delta_time);
+    self.position.y = (self.position.y + math.sin(self.angle) * self.speed * delta_time);
 end
 
 return Fly

@@ -26,10 +26,10 @@ function Sprite:new(sprite_sheet, width, height, x, y, scale_x, scale_y, angle, 
 end
 
 -- sprite update function
-function Sprite:update(tick)
+function Sprite:update(delta_time)
     -- if theres an animation play it
     if (self.animations[self.animation_current] ~= nil) then
-        self.animations[self.animation_current]:update(tick, self.quad);
+        self.animations[self.animation_current]:update(delta_time, self.quad);
     end
 end
 

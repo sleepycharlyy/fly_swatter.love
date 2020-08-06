@@ -32,12 +32,12 @@ function Animation:apply(quad)
 end
 
 -- update animation 
-function Animation:update(tick, quad)
+function Animation:update(delta_time, quad)
     -- if theres no animation (no max frames over 1) just dont bother with updating it
     if(self.frame_max <= 1) then return end 
 
     -- calculate animation 
-    self.timer = self.timer - tick;
+    self.timer = self.timer - delta_time;
     if (self.timer <= 0) then
         self.timer = 1 / self.fps;
         self.frame = self.frame + 1;

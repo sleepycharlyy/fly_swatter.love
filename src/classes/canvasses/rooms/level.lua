@@ -27,10 +27,10 @@ function Level:new()
 end
 
 -- level update event
-function Level:update(tick)
+function Level:update(delta_time)
     -- update entities (go through entity list and update every single one)
     for i = 1, table.getn(self.entities), 1 do
-        self.entities[i]:update(tick);
+        self.entities[i]:update(delta_time);
     end
 end
 

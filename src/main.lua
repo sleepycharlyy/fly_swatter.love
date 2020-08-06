@@ -42,12 +42,12 @@ function love.load()
 end
 
 -- called on every tick for calculations
-function love.update(tick)
+function love.update(delta_time)
     -- accomidate for lag
-    if (tick > 0.035) then return; end
+    if (delta_time > 0.035) then return; end
 
     -- update
-    screen:update(tick);
+    screen:update(delta_time);
 end
 
 -- called on every tick for graphics
