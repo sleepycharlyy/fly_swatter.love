@@ -63,6 +63,7 @@ function Screen:mousepressed(x, y, button, istouch, presses)
         self.level:mousepressed(x, y, button, istouch, presses);
     elseif CURRENT_ROOM == 5 then
         -- game_over
+        self.game_over:mousepressed(x, y, button, istouch, presses, self);
     end
 end
 

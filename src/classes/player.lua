@@ -52,18 +52,43 @@ function Player:mousepressed(x, y, button, istouch, presses, level)
     -- handle mouse press
     -- go through every entity in list of level and check if its fly 
     for i = 1, table.getn(level.entities), 1 do
+        -- is it normal fly?
         if level.entities[i]:get_type() == "Fly" then
             -- calculate position of fly and accomidate screen size
             x = level.entities[i].position.x * (love.graphics.getWidth() / WIDTH);
             y = level.entities[i].position.y * (love.graphics.getHeight() / HEIGHT);
-            -- check if mouse if over fly when yes destroy fly and add score (20 is the size of the hitbox)
+            -- check if mouse if over fly when yes destroy fly and add score (32 is the size of the hitbox)
             if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 32 then
                 CURRENT_SCORE = CURRENT_SCORE + 1; -- add 1 to current score
                 -- deactivate fly
                 level.entities[i]:deactivate(); -- deactivate entity
             end
+        -- is it small fly?
+        elseif level.entities[i]:get_type() == "Fly_Small" then
+            -- calculate position of small fly and accomidate screen size
+            x = level.entities[i].position.x * (love.graphics.getWidth() / WIDTH);
+            y = level.entities[i].position.y * (love.graphics.getHeight() / HEIGHT);
+            -- check if mouse if over small fly when yes destroy fly and add score (16 is the size of the hitbox)
+            if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 16 then
+                CURRENT_SCORE = CURRENT_SCORE + 3; -- add 3 to current score
+                -- deactivate small fly
+                level.entities[i]:deactivate(); -- deactivate entity
+            end           
+        -- its bomb fly
+        else 
+            -- calculate position of bomb fly and accomidate screen size
+            x = level.entities[i].position.x * (love.graphics.getWidth() / WIDTH);
+            y = level.entities[i].position.y * (love.graphics.getHeight() / HEIGHT);
+            -- check if mouse if over bomb fly when yes destroy fly and add score (12 is the size of the hitbox)
+            if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 12 then
+                -- deactivate bomb fly
+                level.entities[i]:deactivate(); -- deactivate entity
+                -- player dies => move to gameover screen
+                game_over();
+            end           
         end
     end
+
 
 
     -- if touch move player to current press position

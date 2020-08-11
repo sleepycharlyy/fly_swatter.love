@@ -15,3 +15,10 @@ function check_collision(x1, y1, w1, h1, x2, y2, w2, h2)
            y1 < y2+h2 and
            y2 < y1+h1;
 end
+
+-- executed when player dies and is moved to game over screen
+function game_over() 
+    -- player dies => move to gameover screen
+    CURRENT_ROOM = 5 -- move to game_over room
+    if (CURRENT_SCORE > HIGH_SCORE) then HIGH_SCORE = CURRENT_SCORE; end -- check if new highscore
+end

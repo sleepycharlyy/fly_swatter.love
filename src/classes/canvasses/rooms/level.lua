@@ -1,4 +1,4 @@
--- TODO: decrease spawn interval 
+-- TODO: decrease spawn interval length over time
 
 ------------------------------------------------
 --                LEVEL_1 (CANVAS)
@@ -10,9 +10,9 @@ require('globals');
 local Canvas = require('classes.canvas');
 local Background = require('classes.canvasses.background');
 local Vector2 = require('classes.math.vector2');
-local Pause = require('classes.canvasses.pause');
 local Player = require('classes.player');
 local Fly = require('classes.entities.fly');
+local Fly_Small = require('classes.entities.fly_small');
 
 local Level = Canvas:derive("Level");
 
@@ -39,9 +39,6 @@ function Level:new()
 
     -- entities list (they are drawn to screen in the order they are added to the list)
     self.entities = {};
-
-    -- pause canvas
-    self.pause = Pause();
 end
 
 -- level update event
@@ -64,10 +61,20 @@ function Level:update(delta_time)
 
         -- calculate difficulty stuffs
             -- spawning_max calculation
-            if(self.timer_playtime > 20) then -- if 10 seconds passed increse max spawning max
-            -- using logarithm to increase spawning spawning_max i might change that later tho because i dont know much about math
-            -- so idk if this is a good idea but it seemed good when i put the numbers through a calculator *shrug*
-            self.spawning_max = math.floor(math.log(self.timer_playtime)) 
+            if (self.timer_playtime > 30) then -- if 30 seconds passed increse max spawning max
+                -- using logarithm to increase spawning spawning_max i might change that later tho because i dont know much about math
+                -- so idk if this is a good idea but it seemed good when i put the numbers through a calculator *shrug*
+                self.spawning_max = math.floor(math.log(self.timer_playtime));
+            end
+            -- calculating interval_spawning_length
+            if (self.timer_playtime < 10) then
+                self.interval_spawning_length = 3;
+            elseif (self.timer_playtime < 15) then
+                self.interval_spawning_length = 2.5;
+            elseif(self.timer_playtime < 40) then
+                self.interval_spawning_length = 2;
+            elseif(self.timer_playtime < 80) then
+                self.interval_spawning_length = 1.5;
             end
 
         -- timer stuffs
@@ -82,8 +89,35 @@ function Level:update(delta_time)
             if(self.interval_spawning <= 0) then 
                 self.interval_spawning = self.interval_spawning_length;
                 -- spawn: half of 'spawning_max' to 'spawning_max' flys
-                for i = 1, math.random(math.floor(self.spawning_max/2), self.spawning_max), 1 do 
-                    self.entities[#self.entities+1] = Fly();
+                for i = 1, math.random(math.floor(self.spawning_max/2), self.spawning_max), 1 do
+                    -- spawn entities 
+                    if (self.timer_playtime < 20) then -- till 20 seconds just normal fly
+                        -- spawn normal fly
+                        self.entities[#self.entities+1] = Fly();
+                    elseif (self.timer_playtime < 50) then -- at 20 till 50 seconds normal fly and small fast fly
+                        -- 1 in 3 chance to spawn small fly
+                        random = math.random(1, 3);
+                        if (random == 3) then
+                            -- spawn fast small fly
+                            self.entities[#self.entities+1] = Fly_Small();
+                        else 
+                            -- spawn normal fly
+                            self.entities[#self.entities+1] = Fly();
+                        end
+                    else
+                        random = math.random(1, 4);
+                        if (random >= 3) then
+                            -- spawn fast small fly
+                            self.entities[#self.entities+1] = Fly_Small();
+                        elseif (random == 2) then
+                            -- spawn fly
+                            self.entities[#self.entities+1] = Fly();
+                        else 
+                            -- spawn bomb fly
+                            self.entities[#self.entities+1] = Fly_Bomb();                           
+                        end
+                    end
+
                 end
             end
     end
@@ -96,6 +130,12 @@ function Level:draw()
             -- draw background
            self.background:draw();
 
+           -- TODO: prettier HUD
+           -- hud
+           love.graphics.setNewFont('assets/fonts/Awoof-Mono-Regular.ttf', 24); -- set font
+           love.graphics.print("SCORE:"..CURRENT_SCORE, 16, 0) -- print current score
+           love.graphics.print("H.SCORE:"..HIGH_SCORE, 120, 0) -- print high score
+
            -- draw entities (go through entity list and draw every single one)
            for i = 1, #self.entities, 1 do
             self.entities[i]:draw();
@@ -103,17 +143,6 @@ function Level:draw()
 
            -- draw player
            self.player:draw();
-
-           -- TODO: prettier HUD
-           -- hud
-           love.graphics.print("SCORE= "..CURRENT_SCORE, 0, 0) -- print current score
-           love.graphics.print("HS= "..HIGH_SCORE, 128, 0) -- print high score
-
-
-           -- check if game paused when yes print pause menu
-           if (PAUSE == true) then
-                self.pause:draw();
-           end
         end);
 
     -- draw screen scaled to window size
