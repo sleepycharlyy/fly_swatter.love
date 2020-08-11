@@ -1,6 +1,6 @@
 ------------------------------------------------
 --                 FLY (ENTITY)
--- fly object (cursor)
+-- fly object
 ------------------------------------------------
 
 -- imports
@@ -13,10 +13,12 @@ local Fly = Entity:derive("Fly");
 
 -- fly constructor
 function Fly:new()
-    self.position = Vector2(WIDTH/2, math.random(32, HEIGHT-32)); -- spawn fly at bottom of screen on random x axis
+    self.position = Vector2(math.random(64, WIDTH-64), math.random(64, HEIGHT-64)); -- spawn fly random
     self.size = Vector2(16, 16);
     self.state = 1; -- 0: deactive, 1: active
-    self.speed = 80; -- entity speed
+    
+    -- movement
+    self.speed = math.random(60,80); -- entity speed
     self.angle = 0 -- angle in which direction the fly flies to
 
     -- timer

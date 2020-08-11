@@ -1,15 +1,15 @@
 ------------------------------------------------
---                PLAYER (ENTITY)
+--                  PLAYER
 -- player object (cursor)
 ------------------------------------------------
 
 -- imports
 require('utils');
-local Entity = require('classes.entity');
+local Class = require('class');
 local Vector2 = require('classes.math.vector2');
 local Sprite = require('classes.graphics.sprite');
 
-local Player = Entity:derive("Player");
+local Player = Class:derive("Player");
 
 -- player constructor
 function Player:new()
@@ -57,7 +57,8 @@ function Player:mousepressed(x, y, button, istouch, presses, level)
             -- check if mouse if over fly when yes destroy fly and add score
             if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 16 then
                 CURRENT_SCORE = CURRENT_SCORE + 1; -- add 1 to current score
-                level.entities[i]:deactivate();
+                -- deactivate fly
+                level.entities[i]:deactivate(); -- deactivate entity
             end
         end
     end

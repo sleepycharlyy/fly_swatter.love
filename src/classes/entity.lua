@@ -15,7 +15,8 @@ function Entity:new(sprite_sheet, width, height, x, y, origin_x, origin_y)
     self.position = Vector2(x, y);
     self.size = Vector2(width, height);
     self.origin = Vector2(origin_x or 0, origin_y or 0);
-
+    self.state = 1; -- 0: deactive, 1: active
+    
     self.sprite = Sprite(sprite_sheet, self.size.x, self.size.y, self.position.x, self.position.y, 1, 1, 0, self.origin.x, self.origin.y);
 end
 
