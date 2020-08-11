@@ -13,12 +13,12 @@ local Fly = Entity:derive("Fly");
 
 -- fly constructor
 function Fly:new()
-    self.position = Vector2(math.random(64, WIDTH-64), math.random(64, HEIGHT-64)); -- spawn fly random
+    self.position = Vector2(math.random(80, WIDTH-80), math.random(80, HEIGHT-80)); -- spawn fly random in the middle of the screen
     self.size = Vector2(16, 16);
     self.state = 1; -- 0: deactive, 1: active
     
     -- movement
-    self.speed = math.random(60,80); -- entity speed
+    self.speed = math.random(40,60); -- entity speed
     self.angle = 0 -- angle in which direction the fly flies to
 
     -- timer

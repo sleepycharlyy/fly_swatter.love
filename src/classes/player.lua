@@ -1,3 +1,5 @@
+-- TODO: invincibility interval 
+
 ------------------------------------------------
 --                  PLAYER
 -- player object (cursor)
@@ -25,7 +27,7 @@ function Player:update(delta_time)
     -- check if on mobile or nahh
     if(OS ~= "Android" and OS ~= "iOS") then
         -- set player position to mouse position (additional calculations to make the mouse position relative to the screen size)
-        self.position.x = (love.mouse.getX()* WIDTH) / love.graphics.getWidth();
+        self.position.x = (love.mouse.getX() * WIDTH) / love.graphics.getWidth();
         self.position.y = (love.mouse.getY() * HEIGHT) / love.graphics.getHeight();
     end
 end
@@ -54,8 +56,8 @@ function Player:mousepressed(x, y, button, istouch, presses, level)
             -- calculate position of fly and accomidate screen size
             x = level.entities[i].position.x * (love.graphics.getWidth() / WIDTH);
             y = level.entities[i].position.y * (love.graphics.getHeight() / HEIGHT);
-            -- check if mouse if over fly when yes destroy fly and add score
-            if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 16 then
+            -- check if mouse if over fly when yes destroy fly and add score (20 is the size of the hitbox)
+            if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 32 then
                 CURRENT_SCORE = CURRENT_SCORE + 1; -- add 1 to current score
                 -- deactivate fly
                 level.entities[i]:deactivate(); -- deactivate entity

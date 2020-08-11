@@ -11,7 +11,6 @@ local Vector2 = require('classes.math.vector2');
 -- rooms
 local Level = require('classes.canvasses.rooms.level');
 local Game_Over = require('classes.canvasses.rooms.game_over');
--- TODO: do other rooms
 
 local Screen = Canvas:derive("Screen");
 
@@ -30,15 +29,7 @@ end
 -- screen update event
 function Screen:update(delta_time)
     -- update rooms
-    if CURRENT_ROOM == 0 then
-        -- main_menu
-    elseif CURRENT_ROOM == 1 then
-        -- options_menu
-    elseif CURRENT_ROOM == 2 then
-        -- pause_menu
-    elseif CURRENT_ROOM == 3 then
-        -- share_menu
-    elseif CURRENT_ROOM == 4 then
+    if CURRENT_ROOM == 4 then
         -- level
         self.level:update(delta_time);
     elseif CURRENT_ROOM == 5 then
@@ -51,18 +42,11 @@ function Screen:draw()
     -- render to screen canvas
         self.canvas:renderTo(function()
            -- draw rooms
-            if CURRENT_ROOM == 0 then
-                -- main_menu
-            elseif CURRENT_ROOM == 1 then
-                -- options_menu
-            elseif CURRENT_ROOM == 2 then
-                -- pause_menu
-            elseif CURRENT_ROOM == 3 then
-                -- share_menu
-            elseif CURRENT_ROOM == 4 then
+            if CURRENT_ROOM == 4 then
                 -- level
                 self.level:draw();
             elseif CURRENT_ROOM == 5 then
+                -- gameover
                 self.game_over:draw();
             end
         end);
@@ -73,16 +57,8 @@ end
 
 -- mouse pressed event
 function Screen:mousepressed(x, y, button, istouch, presses)
-    -- pass function to children
-    if CURRENT_ROOM == 0 then
-        -- main_menu
-    elseif CURRENT_ROOM == 1 then
-        -- options_menu
-    elseif CURRENT_ROOM == 2 then
-        -- pause_menu
-    elseif CURRENT_ROOM == 3 then
-        -- share_menu
-    elseif CURRENT_ROOM == 4 then
+    -- pass function to rooms
+    if CURRENT_ROOM == 4 then
         -- level
         self.level:mousepressed(x, y, button, istouch, presses);
     elseif CURRENT_ROOM == 5 then
