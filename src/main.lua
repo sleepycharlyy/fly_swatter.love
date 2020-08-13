@@ -31,7 +31,7 @@ function love.load()
     end
 
     -- set default scaling filter
-    love.graphics.setDefaultFilter('nearest', 'nearest');
+    love.graphics.setDefaultFilter('nearest', 'nearest', 0);
 
     -- create screen
     screen = Screen();

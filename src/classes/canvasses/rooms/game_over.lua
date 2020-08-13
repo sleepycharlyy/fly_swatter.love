@@ -16,7 +16,7 @@ local Game_Over = Canvas:derive("Game_Over");
 function Game_Over:new()
     self.position = Vector2(0, 0)
     self.size = Vector2(WIDTH, HEIGHT);
-    
+
     self.canvas = love.graphics.newCanvas(self.size.x, self.size.y);
 end
 
@@ -24,7 +24,8 @@ end
 function Game_Over:draw()
     -- render gameover screen
     self.canvas:renderTo(function ()
-        love.graphics.setNewFont('assets/fonts/Awoof-Mono-Regular.ttf', 24); -- set font
+        font = love.graphics.newFont( 'assets/fonts/Awoof-Mono-Regular.ttf', 20, 'mono');
+        love.graphics.setFont(font);
         love.graphics.setColor(0,0,0); -- set to black
         love.graphics.rectangle("fill", 0, 0, WIDTH, HEIGHT); -- black background
         love.graphics.setColor(1,1,1); -- set color to white
@@ -35,7 +36,7 @@ function Game_Over:draw()
         else
             love.graphics.printf("Touch to try again", 0,  (HEIGHT/2)+32, 256, 'center'); -- try again text
         end
-        love.graphics.print("Highscore: "..HIGH_SCORE, 0, 0); -- highscore text
+        love.graphics.print("Highscore: "..HIGH_SCORE, 0, 2); -- highscore text
         love.graphics.print("Score: "..CURRENT_SCORE, 0, 32); -- current score text
     end);
 

@@ -1,5 +1,3 @@
--- TODO: decrease spawn interval length over time
-
 ------------------------------------------------
 --                LEVEL_1 (CANVAS)
 -- the level 1 (entities get placed here)
@@ -13,6 +11,7 @@ local Vector2 = require('classes.math.vector2');
 local Player = require('classes.player');
 local Fly = require('classes.entities.fly');
 local Fly_Small = require('classes.entities.fly_small');
+local Fly_Bomb = require('classes.entities.fly_bomb');
 
 local Level = Canvas:derive("Level");
 
@@ -32,7 +31,7 @@ function Level:new()
     self.interval_spawning_length = 3; -- current time in seconds till new entities spawn
 
     -- how many entities can be spawned max at a time (at the start 2)
-    self.spawning_max = 2; 
+    self.spawning_max = 2;
 
     -- init player
     self.player = Player();
@@ -44,7 +43,7 @@ end
 -- level update event
 function Level:update(delta_time)
     -- check if game is paused when no update
-    if (PAUSED == false) then 
+    if (PAUSED == false) then
 
         -- update entities (go through entity list and update every single one)
         for i = #self.entities, 1, -1 do
@@ -81,26 +80,26 @@ function Level:update(delta_time)
             -- add delta_time every update function to playtime to calculate the time passed since playing
             self.timer_playtime = self.timer_playtime + delta_time;
             -- if interval_spawning is above 0 subtract delta_time
-            if(self.interval_spawning > 0) then 
-                self.interval_spawning = self.interval_spawning - delta_time; 
+            if(self.interval_spawning > 0) then
+                self.interval_spawning = self.interval_spawning - delta_time;
             end
             -- entity spawning
             -- if smaller or equal to 0 => restart timer and spawn random amount of entities
-            if(self.interval_spawning <= 0) then 
+            if(self.interval_spawning <= 0) then
                 self.interval_spawning = self.interval_spawning_length;
                 -- spawn: half of 'spawning_max' to 'spawning_max' flys
                 for i = 1, math.random(math.floor(self.spawning_max/2), self.spawning_max), 1 do
-                    -- spawn entities 
+                    -- spawn entities
                     if (self.timer_playtime < 20) then -- till 20 seconds just normal fly
                         -- spawn normal fly
                         self.entities[#self.entities+1] = Fly();
-                    elseif (self.timer_playtime < 50) then -- at 20 till 50 seconds normal fly and small fast fly
+                    elseif (self.timer_playtime < 40) then -- at 20 till 40 seconds normal fly and small fast fly
                         -- 1 in 3 chance to spawn small fly
                         random = math.random(1, 3);
                         if (random == 3) then
                             -- spawn fast small fly
                             self.entities[#self.entities+1] = Fly_Small();
-                        else 
+                        else
                             -- spawn normal fly
                             self.entities[#self.entities+1] = Fly();
                         end
@@ -112,9 +111,9 @@ function Level:update(delta_time)
                         elseif (random == 2) then
                             -- spawn fly
                             self.entities[#self.entities+1] = Fly();
-                        else 
+                        else
                             -- spawn bomb fly
-                            self.entities[#self.entities+1] = Fly_Bomb();                           
+                            self.entities[#self.entities+1] = Fly_Bomb();
                         end
                     end
 
@@ -132,9 +131,10 @@ function Level:draw()
 
            -- TODO: prettier HUD
            -- hud
-           love.graphics.setNewFont('assets/fonts/Awoof-Mono-Regular.ttf', 24); -- set font
-           love.graphics.print("SCORE:"..CURRENT_SCORE, 16, 0) -- print current score
-           love.graphics.print("H.SCORE:"..HIGH_SCORE, 120, 0) -- print high score
+           font = love.graphics.newFont( 'assets/fonts/Awoof-Mono-Regular.ttf', 20, 'mono');
+           love.graphics.setFont(font);
+           love.graphics.print("SCORE:"..CURRENT_SCORE, 16, 1) -- print current score
+           love.graphics.print("HIGHSCORE:"..HIGH_SCORE, 120, 1) -- print high score
 
            -- draw entities (go through entity list and draw every single one)
            for i = 1, #self.entities, 1 do
@@ -151,7 +151,7 @@ end
 
 -- mouse pressed event
 function Level:mousepressed(x, y, button, istouch, presses)
-    -- pass function to player and pass self 
+    -- pass function to player and pass self
     self.player:mousepressed(x, y, button, istouch, presses, self);
 end
 
