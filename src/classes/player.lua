@@ -8,6 +8,7 @@ require('utils');
 local Class = require('class');
 local Vector2 = require('classes.math.vector2');
 local Sprite = require('classes.graphics.sprite');
+local Animation = require('classes.graphics.animation');
 
 local Player = Class:derive("Player");
 
@@ -17,16 +18,26 @@ function Player:new()
     self.size = Vector2(16, 60);
 
     -- invincibility timer (invincibility means flys are invincible not player)
-    self.invincibility_timer = 0.5;
+    self.invincibility_timer_max = 0.25;
+    self.invincibility_timer = self.invincibility_timer_max;
     self.invincible = false;
 
     -- sprite
     self.sprite_sheet = love.graphics.newImage("assets/graphics/sprite_sheets/player.png");
     self.sprite = Sprite(self.sprite_sheet, self.size.x, self.size.y, self.position.x, self.position.y, 1, 1, 0);
+
+    -- animation
+    self.animation_hit = Animation(16, 60, 0, 2, 5);
+    self.sprite:animation_add("hit", self.animation_hit);
+    self.animation_idle = Animation(16, 60, 0, 1, 0);
+    self.sprite:animation_add("idle", self.animation_idle);
 end
 
 -- player update event
 function Player:update(delta_time)
+    -- update sprite (animation)
+        self.sprite:update(delta_time);
+
     -- check if on mobile or nahh
     if(OS ~= "Android" and OS ~= "iOS") then
         -- set player position to mouse position (additional calculations to make the mouse position relative to the screen size)
@@ -38,8 +49,9 @@ function Player:update(delta_time)
     if(self.invincible == true) then
       self.invincibility_timer = self.invincibility_timer - delta_time;
       if self.invincibility_timer <= 0 then
-        self.invincibility_timer = 0.5;
+        self.invincibility_timer = self.invincibility_timer_max; -- reset timer
         self.invincible = false;
+        self.sprite:animate("idle"); -- reset animation
       end
     end
 end
@@ -70,10 +82,7 @@ function Player:mousepressed(x, y, button, istouch, presses, level)
           y = level.entities[i].position.y * (love.graphics.getHeight() / HEIGHT);
           -- check if mouse if over fly when yes destroy fly and add score (32 is the size of the hitbox)
           if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 32 then
-            CURRENT_SCORE = CURRENT_SCORE + 1; -- add 1 to current score
-            -- deactivate fly
-            level.entities[i]:deactivate(); -- deactivate entity
-            self.invincible = true; -- self.invincibility of other flys activateeeddd!
+            self:enemy_killed_event(level.entities[i], 1);
           end
           -- is it small fly?
         elseif level.entities[i]:get_type() == "Fly_Small" then
@@ -82,10 +91,7 @@ function Player:mousepressed(x, y, button, istouch, presses, level)
           y = level.entities[i].position.y * (love.graphics.getHeight() / HEIGHT);
           -- check if mouse if over small fly when yes destroy fly and add score (16 is the size of the hitbox)
           if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 16 then
-            CURRENT_SCORE = CURRENT_SCORE + 3; -- add 3 to current score
-            -- deactivate small fly
-            level.entities[i]:deactivate(); -- deactivate entity
-            self.invincible = true; -- self.invincibility of other flys activateeeddd!
+            self:enemy_killed_event(level.entities[i], 3);
           end
           -- its bomb fly
         else
@@ -109,6 +115,14 @@ function Player:mousepressed(x, y, button, istouch, presses, level)
         self.position.x = (x * WIDTH) / love.graphics.getWidth();
         self.position.y = (y * HEIGHT) / love.graphics.getHeight();
     end
+end
+
+-- gets run when an enemy is killed and takes in entity and the score to add
+function Player:enemy_killed_event(entity, score)
+            CURRENT_SCORE = CURRENT_SCORE + score; -- add score
+            entity:deactivate(); -- deactivate entity
+            self.invincible = true; -- self.invincibility of other flys activateeeddd!
+            self.sprite:animate("hit"); -- animate hitting animation
 end
 
 return Player;

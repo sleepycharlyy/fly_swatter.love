@@ -14,7 +14,8 @@ DEBUG = true; -- debug mode
 -- globals
 HIGH_SCORE = 0;
 CURRENT_SCORE = 0;
-CURRENT_ROOM = 4; -- it starts at 4 cause other rooms were planned so well idk maybe ill add them later
+CURRENT_ROOM = 3; -- it starts at 3 cause other rooms were planned so well idk maybe ill add them later
+    -- 3 = titlescreen
     -- 4 = level
     -- 5 = gameover
 PAUSED = false; -- if game is paused

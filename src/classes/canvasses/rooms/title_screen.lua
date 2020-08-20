@@ -1,6 +1,6 @@
 ------------------------------------------------
---             GAME_OVER (CANVAS)
--- game over screen
+--             TITLE_SCREEN (CANVAS)
+-- title screen
 ------------------------------------------------
 
 -- imports
@@ -8,19 +8,19 @@ local Canvas = require('classes.canvas');
 local Vector2 = require('classes.math.vector2');
 local Level = require('classes.canvasses.rooms.level');
 
-local Game_Over = Canvas:derive("Game_Over");
+local Title_Screen = Canvas:derive("Title_Screen");
 
--- gameover constructor
-function Game_Over:new()
+-- titlescreen constructor
+function Title_Screen:new()
     self.position = Vector2(0, 0)
     self.size = Vector2(WIDTH, HEIGHT);
 
     self.canvas = love.graphics.newCanvas(self.size.x, self.size.y);
 end
 
--- gameover draw event
-function Game_Over:draw()
-    -- render gameover screen
+-- titlescreen draw event
+function Title_Screen:draw()
+    -- render titlescreen screen
     self.canvas:renderTo(function ()
         font = love.graphics.newFont( 'assets/fonts/Awoof-Mono-Regular.ttf', 20, 'mono');
         love.graphics.setFont(font);
@@ -38,12 +38,12 @@ function Game_Over:draw()
         love.graphics.print("Score: "..CURRENT_SCORE, 0, 32); -- current score text
     end);
 
-    -- draw gameover
+    -- draw titlescreen
     love.graphics.draw(self.canvas, self.position.x, self.position.y);
 end
 
 -- mouse pressed event
-function Game_Over:mousepressed(x, y, button, istouch, presses, screen_class)
+function Title_Screen:mousepressed(x, y, button, istouch, presses, screen_class)
     -- mouse was pressed so move to level room again
     screen_class.level = Level(); -- reset level
     CURRENT_SCORE = 0; -- reset current score
@@ -51,4 +51,4 @@ function Game_Over:mousepressed(x, y, button, istouch, presses, screen_class)
 end
 
 
-return Game_Over
+return Title_Screen

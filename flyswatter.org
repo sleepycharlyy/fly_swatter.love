@@ -1,0 +1,16 @@
+* Fly Swatter
+** About
+   Flyswatter is a game that takes inspiration from
+   Mario paints "Gnat Attack" Minigame
+** Tasks
+*** DONE Player 
+*** TODO Music [0/2]
+    - [ ] Main Menu
+    - [ ] Level
+*** TODO Sound [0/5]
+    - [ ] Hit
+    - [ ] Kill fly
+    - [ ] Fly
+    - [ ] Die
+    - [ ] Bomb
+

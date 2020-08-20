@@ -11,6 +11,7 @@ local Vector2 = require('classes.math.vector2');
 -- rooms
 local Level = require('classes.canvasses.rooms.level');
 local Game_Over = require('classes.canvasses.rooms.game_over');
+local Title_Screen = require('classes.canvasses.rooms.title_screen');
 
 local Screen = Canvas:derive("Screen");
 
@@ -24,12 +25,15 @@ function Screen:new()
     -- rooms
     self.level = Level();
     self.game_over = Game_Over();
+    self.title_screen = Title_Screen();
 end
 
 -- screen update event
 function Screen:update(delta_time)
     -- update rooms
-    if CURRENT_ROOM == 4 then
+    if CURRENT_ROOM == 3 then
+        -- title screen
+    elseif CURRENT_ROOM == 4 then
         -- level
         self.level:update(delta_time);
     elseif CURRENT_ROOM == 5 then
@@ -42,7 +46,10 @@ function Screen:draw()
     -- render to screen canvas
         self.canvas:renderTo(function()
            -- draw rooms
-            if CURRENT_ROOM == 4 then
+            if CURRENT_ROOM == 3 then
+                -- title screen
+                self.title_screen:draw();
+            elseif CURRENT_ROOM == 4 then
                 -- level
                 self.level:draw();
             elseif CURRENT_ROOM == 5 then
@@ -58,7 +65,10 @@ end
 -- mouse pressed event
 function Screen:mousepressed(x, y, button, istouch, presses)
     -- pass function to rooms
-    if CURRENT_ROOM == 4 then
+    if CURRENT_ROOM == 3 then
+        -- title screen
+        self.title_screen:mousepressed(x, y, button, istouch, presses, self);
+    elseif CURRENT_ROOM == 4 then
         -- level
         self.level:mousepressed(x, y, button, istouch, presses);
     elseif CURRENT_ROOM == 5 then

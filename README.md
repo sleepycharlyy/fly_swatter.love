@@ -15,7 +15,7 @@ Made with LOVE2D/LÖVE in lua.
 ## Credits
 
 Assets and Code made by [sleepycharlyy](https://github.com/sleepycharlyy).  
-Inspired by the Mario Paint minigame  "Gnat Attack".  
+Inspired by the Mario Paint minigame "Gnat Attack".  
 Uses the [LÖVE Engine](https://github.com/love2d/love).  
 Font: [duckinator/awoof](https://github.com/duckinator/awoof) under MIT License.  
 

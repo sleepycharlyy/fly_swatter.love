@@ -7,6 +7,7 @@
 
 -- imports
 require('globals');
+require('filesystem');
 local Screen = require('classes.canvasses.screen');
 
 -- executes when game starts
@@ -35,6 +36,9 @@ function love.load()
 
     -- create screen
     screen = Screen();
+
+    -- file load
+    file_highscore_load();
 end
 
 -- called on every tick for calculations

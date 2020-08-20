@@ -25,7 +25,7 @@ function Sprite:new(sprite_sheet, width, height, x, y, scale_x, scale_y, angle, 
     self.animation_current = "";
 end
 
--- sprite update function
+-- sprite update function 
 function Sprite:update(delta_time)
     -- if theres an animation play it
     if (self.animations[self.animation_current] ~= nil) then
