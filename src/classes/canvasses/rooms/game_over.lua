@@ -12,7 +12,7 @@ local Game_Over = Canvas:derive("Game_Over");
 
 -- gameover constructor
 function Game_Over:new()
-    self.position = Vector2(0, 0)
+    self.position = Vector2(0, 0);
     self.size = Vector2(WIDTH, HEIGHT);
 
     self.canvas = love.graphics.newCanvas(self.size.x, self.size.y);
