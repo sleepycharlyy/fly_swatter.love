@@ -37,7 +37,6 @@ end
 function Player:update(delta_time)
     -- update sprite (animation)
         self.sprite:update(delta_time);
-
     -- check if on mobile or nahh
     if(OS ~= "Android" and OS ~= "iOS") then
         -- set player position to mouse position (additional calculations to make the mouse position relative to the screen size)
@@ -80,8 +79,8 @@ function Player:mousepressed(x, y, button, istouch, presses, level)
           -- calculate position of fly and accomidate screen size
           x = level.entities[i].position.x * (love.graphics.getWidth() / WIDTH);
           y = level.entities[i].position.y * (love.graphics.getHeight() / HEIGHT);
-          -- check if mouse if over fly when yes destroy fly and add score (32 is the size of the hitbox)
-          if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 32 then
+          -- check if mouse if over fly when yes destroy fly and add score (24 is the size of the hitbox)
+          if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 24 * (love.graphics.getWidth()/love.graphics.getHeight()) then
             self:enemy_killed_event(level.entities[i], 1);
           end
           -- is it small fly?
@@ -89,8 +88,8 @@ function Player:mousepressed(x, y, button, istouch, presses, level)
           -- calculate position of small fly and accomidate screen size
           x = level.entities[i].position.x * (love.graphics.getWidth() / WIDTH);
           y = level.entities[i].position.y * (love.graphics.getHeight() / HEIGHT);
-          -- check if mouse if over small fly when yes destroy fly and add score (16 is the size of the hitbox)
-          if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 16 then
+          -- check if mouse if over small fly when yes destroy fly and add score (24 is the size of the hitbox)
+          if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 24 * (love.graphics.getWidth()/love.graphics.getHeight()) then
             self:enemy_killed_event(level.entities[i], 3);
           end
           -- its bomb fly
@@ -98,8 +97,8 @@ function Player:mousepressed(x, y, button, istouch, presses, level)
           -- calculate position of bomb fly and accomidate screen size
           x = level.entities[i].position.x * (love.graphics.getWidth() / WIDTH);
           y = level.entities[i].position.y * (love.graphics.getHeight() / HEIGHT);
-          -- check if mouse if over bomb fly when yes destroy fly and add score (12 is the size of the hitbox)
-          if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 12 then
+          -- check if mouse if over bomb fly when yes destroy fly and add score (24 is the size of the hitbox)
+          if get_distance(x, y, love.mouse.getX(), love.mouse.getY()) < 24 * (love.graphics.getWidth()/love.graphics.getHeight()) then
             -- deactivate bomb fly
             level.entities[i]:deactivate(); -- deactivate entity
             -- player dies => move to gameover screen
